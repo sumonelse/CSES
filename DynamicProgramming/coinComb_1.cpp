@@ -16,13 +16,11 @@ int main(){
     dp[0] = 1;
     
     for(int sum = 1; sum <= x; sum++){
-        int combination = 0;
         for(int j = 0; j < n; j++){
             if(coins[j] <= sum){
-                combination = (1ll * combination + dp[sum - coins[j]]) % mod;
+                dp[sum] = (1ll * dp[sum] + dp[sum - coins[j]]) % mod;
             }
         }
-        dp[sum] = combination;
     }
 
     cout << dp[x] << endl;
