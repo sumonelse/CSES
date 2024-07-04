@@ -1,28 +1,8 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int findMin(int n, vector<int> &dp){
-    if(n == 0) return 0;
-
-    // cout << "n: " << n << endl;
-
-    if(dp[n] != -1) return dp[n];
-
-    int ans = INT_MAX;
-    int temp = n;
-    while(temp > 0){
-        int digit = temp % 10;
-        if(digit != 0){
-            ans = min(ans, findMin(n - digit, dp) + 1);
-        } 
-        temp /= 10;
-    }
-
-    return dp[n] = ans;
-}
-
 int main(){
-    // SMART-BRUTE-FORCE[DP(MEMOIZATION)]
+    // SMART-BRUTE-FORCE[DP(TABULATION)]
     /**
      * Time : EASY :)...
      * Help : NO
@@ -30,7 +10,19 @@ int main(){
     int n;
     cin >> n;
 
-    vector<int> dp(n + 1, -1);
+    vector<int> dp(n + 1, INT_MAX);
+    dp[0] = 0;
 
-    cout << findMin(n, dp) << endl;
+    for(int i = 1; i <= n; i++){
+        int temp = i;
+        while(temp > 0){
+            int digit = temp % 10;
+            if(digit != 0){
+                dp[i] = min(dp[i], dp[i - digit]+ 1);
+            } 
+            temp /= 10;
+        }
+    }
+
+    cout << dp[n] << endl;
 }
