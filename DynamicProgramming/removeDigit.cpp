@@ -22,6 +22,10 @@ int findMin(int n){
 
 int main(){
     // GREEDY SOLUTION
+    /**
+     * Time : EASY :)...
+     * Help : NO
+     */
     int n;
     cin >> n;
 
