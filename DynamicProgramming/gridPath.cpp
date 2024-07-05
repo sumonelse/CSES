@@ -4,7 +4,7 @@ using namespace std;
 const int MOD = (int)1e9 + 7;
 
 int main(){
-    // SMART-BRUTE-FORCE[DP(TABULATOIN)]
+    // SMART-BRUTE-FORCE[DP(SPACE OPTIMIZATION)]
     int n;
     cin >> n;
 
@@ -13,23 +13,29 @@ int main(){
         cin >> grid[i];
     }
 
-    vector<vector<int>> dp(n, vector<int>(n, 0));
-    dp[0][0] = 1;
+    vector<int> prev(n, 0);
 
-    for(int x = 0; x < n; x++){
+    // Filling the first-row
+    prev[0] = grid[0][0] == '*' ? 0 : 1;
+    for(int y = 1; y < n; y++){
+        if(grid[0][y] != '*') prev[y] = prev[y - 1];
+    }
+
+    for(int x = 1; x < n; x++){
+        vector<int> curr(n); // To store all paths of Current Row
         for(int y = 0; y < n; y++){
             if(grid[x][y] == '*'){
-                dp[x][y] = 0;
+                curr[y] = 0;
                 continue;
             }
 
-            int left = 0, up = 0;
-            if(y > 0) left = dp[x][y - 1];
-            if(x > 0) up = dp[x - 1][y];
+            int left = 0, up = prev[y];
+            if(y > 0) left = curr[y - 1];
             
-            dp[x][y] += (left + up) % MOD;
+            curr[y] = (left + up) % MOD;
         }
+        prev = curr;
     }
 
-    cout << dp[n - 1][n - 1] << endl;
+    cout << prev[n - 1] << endl;
 }
