@@ -3,6 +3,12 @@ using namespace std;
 
 int main(){
     // SMART-BRUTE-FORCE[DP(TABULATION)]
+    /*
+    The Question based on 0/1 KNAPSACK(BOUNDED) as we can buy the book at max ONCE.
+    Observations:
+    1) Here, x -> the TOTAL AMT. to spend is the same, as the TOTAL SPACE in bag to use in KNAPSACK.
+    2) Get MAX PAGES is same, as Get MAX PROFIT in KNAPSACK.
+    */
     int n, x;
     cin >> n >> x;
 
