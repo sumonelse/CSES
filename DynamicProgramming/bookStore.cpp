@@ -1,21 +1,21 @@
 #include<bits/stdc++.h>
 using namespace std;
 
-int findMaxPage(int i, int priceAvl, int *price, int *pages, vector<vector<int>> &dp){
+int findMaxPage(int i, int budget, int *price, int *pages, vector<vector<int>> &dp){
     // BASE-CASE
     if(i == 0){
-        return (price[i] <= priceAvl ? pages[i] : 0);
+        return (price[i] <= budget ? pages[i] : 0);
     }
 
-    if(dp[i][priceAvl] != -1) return dp[i][priceAvl];
+    if(dp[i][budget] != -1) return dp[i][budget];
 
-    int notTake = findMaxPage(i - 1, priceAvl, price, pages, dp);
+    int notTake = findMaxPage(i - 1, budget, price, pages, dp);
     int take = 0;
-    if(price[i] <= priceAvl){
-        take = pages[i] + findMaxPage(i - 1, priceAvl - price[i], price, pages, dp);
+    if(price[i] <= budget){
+        take = pages[i] + findMaxPage(i - 1, budget - price[i], price, pages, dp);
     }
 
-    return dp[i][priceAvl] = max(notTake, take);
+    return dp[i][budget] = max(notTake, take);
 }
 
 int main(){
