@@ -35,6 +35,7 @@ int main(){
         vi ans(n);
         int lastRoom = 0;
 
+        // stores departure time and allocated room no.
         priority_queue<pair<int, int>> pq;
         REP(0, n){
             if(pq.empty() || -pq.top().first >= v[i].first.first){
