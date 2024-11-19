@@ -56,18 +56,16 @@ int main(){
         
         vector<bool> visited(n + 1, false); // Track Visited City when doing DFS
 
-        int connectedCompCnt = 0; // Count of no. of Connected Components(City)
         vi representativeCities; // Stores a City from each Connected Components(City)
 
         REP(i, 1, n + 1){
             if(!visited[i]){
                 representativeCities.PB(i);
                 dfs(i, visited, graph);
-                connectedCompCnt++;
             }
         }
 
-        cout << connectedCompCnt - 1 << ln;
+        cout << representativeCities.size() - 1 << ln;
         REP(i, 0, representativeCities.size() - 1){
             cout << representativeCities[i] << " " << representativeCities[i + 1] << ln;
         }
